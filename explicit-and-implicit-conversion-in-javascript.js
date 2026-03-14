@@ -1,32 +1,35 @@
-/*
-
-Part 1: Debugging Challenge
-The JavaScript code below contains intentional bugs related to type conversion.
-Please do the following:
-  - Run the script to observe unexpected outputs.
-  - Debug and fix the errors using explicit type conversion methods like  Number() ,  String() , or    Boolean()  where necessary.
-  - Annotate the code with comments explaining why the fix works.
-
-Part 2: Write Your Own Examples
-Write their own code that demonstrates:
-  - One example of implicit type conversion.
-  - One example of explicit type conversion.
-
-  *We encourage you to:
-Include at least one edge case, like NaN, undefined, or null .
-Use console.log() to clearly show the before-and-after type conversions.
-
-*/
+/*index .js
 
 
-let result = "5" - 2;
-console.log("The result is: " + result);
+   PART 1 — DEBUGGING CHALLENGE
+   ============================ */
 
-let isValid = Boolean("false");
-if (isValid) {
-    console.log("This is valid!");
-}
+// Example Bug 1: Unexpected string concatenation
+let a = "5";
+let b = 10;
 
-let age = "25";
-let totalAge = age + 5;
-console.log("Total Age: " + totalAge);
+// FIX: Convert "a" to a number so addition works correctly
+let sum = Number(a) + b;
+console.log("Sum:", sum); 
+// Explanation: Without Number(), "5" + 10 becomes "510" because JS concatenates strings.
+
+// Example Bug 2: Boolean confusion
+let isReady = "false";
+
+// FIX: Convert string to actual boolean
+isReady = (isReady === "true");
+console.log("Is Ready:", isReady);
+// Explanation: Any non-empty string is truthy, so "false" would incorrectly behave as true.
+
+// Example Bug 3: undefined causing NaN
+let value;
+console.log("Original value + 5:", value + 5); // NaN
+
+// FIX: Convert undefined to 0 (or handle NaN)
+let safeValue = Number(value);
+if (isNaN(safeValue)) safeValue = 0;
+
+console.log("Fixed value + 5:", safeValue + 5);
+// Explanation: Number(undefined) → NaN, so we check and replace with 0.
+
+
